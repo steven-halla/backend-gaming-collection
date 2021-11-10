@@ -37,10 +37,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
         return user
 
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'password', 'email',
-                  'first_name', 'last_name', 'middle_name', 'favorite_game')
+#
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ('username', 'password', 'email',
+#                   'first_name', 'last_name', 'middle_name', 'favorite_game')
 

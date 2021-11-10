@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.http import Http404
 
-from .serializers import RegistrationSerializer, UserSerializer
+from .serializers import RegistrationSerializer
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -21,7 +21,7 @@ class UserList(APIView):
 
     def get(self, request):
         users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
+        serializer = RegistrationSerializer(users, many=True)
         return Response(serializer.data)
 
 
@@ -34,6 +34,6 @@ class UserView(APIView):
 
     def get(self, request, pk):
         user = self.get_object(pk)
-        serializer = UserSerializer(user)
+        serializer = RegistrationSerializer(user)
         return Response(serializer.data)
 
