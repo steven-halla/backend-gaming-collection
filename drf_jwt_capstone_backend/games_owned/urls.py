@@ -1,7 +1,9 @@
 from django.urls import path
 
-from .views import GamesOwned
+from .views import GamesOwnedDetail, GamesOwnedAdd, GamesOwnedList
 
 urlpatterns = [
-    path('<int:pk_game>/users/<int:pk_user>/', GamesOwned.as_view(), name='games_owned')
+    path('', GamesOwnedAdd.as_view()),
+    path('/<int:pk>', GamesOwnedDetail.as_view()),
+    path('user/<int:pk_user>/', GamesOwnedList.as_view()),
 ]
