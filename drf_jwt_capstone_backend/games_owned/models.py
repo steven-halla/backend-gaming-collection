@@ -1,7 +1,6 @@
-from django.contrib.auth.models import User
 from django.db import models
-
-from drf_jwt_capstone_backend.games.models import Game
+from authentication.models import User
+from games.models import Game
 
 
 class GamesOwned(models.Model):

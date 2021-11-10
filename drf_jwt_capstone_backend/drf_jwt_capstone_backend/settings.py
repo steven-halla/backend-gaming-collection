@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
-    'corsheaders',
     'games.apps.GamesConfig',
     'games_owned.apps.GamesOwnedConfig',
 
