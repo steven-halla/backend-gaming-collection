@@ -16,6 +16,7 @@ class GameList(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
+
         games = Game.objects.all()
         serializer = GameSerializer(games, many=True)
         return Response(serializer.data)

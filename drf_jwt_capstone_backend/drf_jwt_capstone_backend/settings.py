@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
     'games.apps.GamesConfig',
+    'games_owned.apps.GamesOwnedConfig',
+
     # 'users.apps.UsersConfig',
 ]
 
