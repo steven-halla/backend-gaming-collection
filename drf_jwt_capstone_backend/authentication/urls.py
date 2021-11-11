@@ -10,5 +10,5 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('users/', UserList.as_view(), name="users"),
     path('users/<int:pk>/', UserView.as_view(), name="user"),
-    path('games/<int:pk_game>/users/<int:pk_user>', GamesOwnedAdd.as_view(), name="gamesowned" )
+    path('games/<int:pk_game>/users/<int:pk_user>', GamesOwnedAdd.as_view(), name="gamesowned")
 ]
