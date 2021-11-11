@@ -2,11 +2,12 @@ import json
 
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, Http404
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from .models import GamesOwned
 from .serializers import GamesOwnedSerializer
 
@@ -41,6 +42,7 @@ class GamesOwnedList(APIView):
         return HttpResponse(serialized, content_type='application/json')
 
 
+
 class GamesOwnedAdd(APIView):
     permission_classes = [AllowAny]
 
@@ -55,17 +57,25 @@ class GamesOwnedAdd(APIView):
 
 
 class GamesOwnedDetail(APIView):
+
+
+
     def get_object(self, pk):
-        pass
+        try:
+            return GamesOwned.objects.get(pk=pk)
+        except GamesOwned.DoesNotExist:
+            raise Http404
 
     def get(self, request, pk):
-        pass
-
-    def put(self, request, pk):
-        pass
+        print("i am get function")
+        games_owned = self.get_object(pk)
+        serializer = GamesOwnedSerializer(games_owned)
+        return Response(serializer.data)
 
     def delete(self, request, pk):
+        ("is delete getting called")
         game_owned = self.get_object(pk)
         serializer = GamesOwnedSerializer(game_owned)
+        print("I am delete function")
         game_owned.delete()
         return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
