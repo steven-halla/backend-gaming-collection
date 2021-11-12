@@ -8,4 +8,7 @@ from rest_framework.views import APIView
 
 from .models import GameReviews
 from .serializers import GameReviewsSerializer
-
+#
+# class GameReviewsHandler(APIView):
+#     def get(self, request, pk_game):
+#

@@ -22,5 +22,5 @@ urlpatterns = [
     path('api/auth/', include('authentication.urls')),
     path('api/games/', include('games.urls')),
     path('api/games_owned/', include('games_owned.urls')),
-    path('api/game_reviews/', include('game_reviews.urls'))
+    # path('api/game_reviews/', include('game_reviews.urls'))
 ]

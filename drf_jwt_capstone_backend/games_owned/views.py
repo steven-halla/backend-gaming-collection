@@ -23,6 +23,7 @@ class GamesOwnedList(APIView):
                 "id": owned_game.game.id,
                 "title": owned_game.game.title,
                 "genre": owned_game.game.genre,
+                "value": owned_game.game.value,
             }
 
         games = list(map(build_game, list(owned_games)))
