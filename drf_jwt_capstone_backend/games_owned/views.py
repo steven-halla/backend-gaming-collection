@@ -1,7 +1,4 @@
-import json
-
 from django.core import serializers
-from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse, HttpResponse, Http404
 from rest_framework import status
 from rest_framework.permissions import AllowAny
@@ -18,30 +15,22 @@ class GamesOwnedList(APIView):
             .filter(user_id=pk_user) \
             .select_related()
 
-        def build_game(owned_game):
+        def build_owned_game(owned_game):
             return {
-                "id": owned_game.game.id,
-                "title": owned_game.game.title,
-                "genre": owned_game.game.genre,
-                "value": owned_game.game.value,
+                "id": owned_game.id,
+                "game": {
+                    "id": owned_game.game.id,
+                    "title": owned_game.game.title,
+                    "genre": owned_game.game.genre,
+                    "value": owned_game.game.value
+                }
             }
 
-        games = list(map(build_game, list(owned_games)))
-        print(games)
+        games = list(map(build_owned_game, list(owned_games)))
         for game in games:
             print(game)
 
         return JsonResponse(games, safe=False)
-
-        # print(games_owned)
-        # for game in games_owned:
-        #     print(game.game.title)
-        # <QuerySet [{'id': 1, 'user_id': 1, 'game_id': 1}, {'id': 3, 'user_id': 1, 'game_id': 3}, {'id': 4, 'user_id': 1, 'game_id': 3}, {'id': 5, 'user_id': 1, 'game_id': 3}, {'id': 6, 'user_id': 1, 'game_id': 3}]>
-        # games_owned is a QuerySet, and if wrap in list(), it works as expected
-        # json_response = json.dumps(list(games_owned))
-        serialized = serializers.serialize("json", games)
-        return HttpResponse(serialized, content_type='application/json')
-
 
 
 class GamesOwnedAdd(APIView):
@@ -58,8 +47,6 @@ class GamesOwnedAdd(APIView):
 
 
 class GamesOwnedDetail(APIView):
-
-
 
     def get_object(self, pk):
         try:
