@@ -21,8 +21,13 @@ class GamesOwnedList(APIView):
                 "game": {
                     "id": owned_game.game.id,
                     "title": owned_game.game.title,
+                    "publisher": owned_game.game.publisher,
                     "genre": owned_game.game.genre,
-                    "value": owned_game.game.value
+                    "image": owned_game.game.image,
+                    "release_data": owned_game.game.release_date,
+                    "value": owned_game.game.value,
+                    "rating": owned_game.game.rating,
+
                 }
             }
 
