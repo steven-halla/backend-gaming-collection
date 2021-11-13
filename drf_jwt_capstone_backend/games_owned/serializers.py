@@ -9,7 +9,7 @@ class GamesOwnedSerializer(serializers.ModelSerializer):
         model = GamesOwned
         # If added new columns through the User model, add them in the fields
         # list as seen below
-        fields = ('user_id', 'game_id')
+        fields = ('user_id', 'game_id', 'owner_rating', 'review')
 
     def create(self, validated_data):
         print('validated data')

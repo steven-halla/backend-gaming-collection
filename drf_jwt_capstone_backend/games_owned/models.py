@@ -6,5 +6,7 @@ from games.models import Game
 class GamesOwned(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     game = models.ForeignKey(Game, on_delete=models.DO_NOTHING)
+    owner_rating = models.IntegerField()
+    review = models.CharField(max_length=500)
 
 

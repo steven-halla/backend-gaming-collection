@@ -24,10 +24,10 @@ class GamesOwnedList(APIView):
                     "publisher": owned_game.game.publisher,
                     "genre": owned_game.game.genre,
                     "image": owned_game.game.image,
+                    "system": owned_game.game.system,
                     "release_data": owned_game.game.release_date,
                     "value": owned_game.game.value,
                     "rating": owned_game.game.rating,
-
                 }
             }
 
