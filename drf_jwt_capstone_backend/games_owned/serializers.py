@@ -16,12 +16,18 @@ class GamesOwnedSerializer(serializers.ModelSerializer):
         print(validated_data)
         # print(self.initial_data)
         # why is validated_data (as well as self.validated_data empty despite is_valid being called and returning True)
-        owned_game = GamesOwned.objects.create(**self.initial_data)
+        game_owned = GamesOwned.objects.create(**self.initial_data)
 
-        return owned_game
+        return game_owned
 
+    def update(self, game_owned, **kwargs):
+        print('game_owned data')
+        print(game_owned)
+        GamesOwned.save(game_owned)
+        # game_owned = GamesOwned.objects.update(game_owned, kwargs)
+        return game_owned
 
-    #
-    # def is_valid(self, raise_exception=False):
-    #     return True
+    def is_valid(self, raise_exception=False):
+        super().is_valid(raise_exception)
+        return True
 
