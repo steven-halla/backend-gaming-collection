@@ -15,10 +15,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        # If added new columns through the User model, add them in the fields
-        # list as seen below
+        # If added new columns through the User model, add them in the fields list as seen below
         fields = ('id', 'username', 'password', 'email',
                   'first_name', 'last_name', 'middle_name', 'favorite_game')
+
+        # without this id doesn't appear in response
+        # (with 'id' only added to fields ^, signup fails because it requires an id field)
+        optional_fields = ['id']
 
     def create(self, validated_data):
         user = User.objects.create(
@@ -36,11 +39,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
-
-#
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ('username', 'password', 'email',
-#                   'first_name', 'last_name', 'middle_name', 'favorite_game')
-
