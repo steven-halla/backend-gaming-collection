@@ -9,5 +9,5 @@ class Game(models.Model):
     system = models.CharField(max_length=100)
     release_date = models.IntegerField()
     value = models.IntegerField()
-    rating = models.IntegerField()
+
 
