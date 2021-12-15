@@ -29,10 +29,8 @@ def build_owned_game_for_json_serialization(owned_game):
             "system": owned_game.game.system,
             "release_date": owned_game.game.release_date,
             "value": owned_game.game.value,
-            "rating": owned_game.game.rating,
         },
-        "owner_rating": owned_game.owner_rating,
-        "review": owned_game.review
+        "notes": owned_game.notes
     }
 
 class GamesOwnedAPI(APIView):
@@ -60,8 +58,7 @@ class GamesOwnedAPI(APIView):
         games_owned = {
             "user_id": user_id,
             "game_id": game_id,
-            "owner_rating": 0,
-            "review": "N/A"
+            "notes": "N/A"
         }
         serializer = GamesOwnedSerializer(data=games_owned)
         if serializer.is_valid(raise_exception=True):
@@ -79,8 +76,7 @@ class GamesOwnedAPI(APIView):
 
     def patch(self, request, user_id, game_id):  # pk = GamesOwnedId
         game_owned = self.get_object(user_id, game_id)
-        game_owned.owner_rating = request.data['owner_rating']
-        game_owned.review = request.data['review']
+        game_owned.notes = request.data['notes']
 
         # todo confirm game owned is not null (i.e. exists)
         serializer = GamesOwnedSerializer(game_owned)
@@ -112,8 +108,7 @@ class GamesOwnedAdd(APIView):
         games_owned = {
             "user_id": request.data['user_id'],
             "game_id": request.data['game_id'],
-            "owner_rating": 0,
-            "review": "N/A"
+            "notes": "N/A"
         }
         serializer = GamesOwnedSerializer(data=games_owned)
         if serializer.is_valid(raise_exception=True):
@@ -151,8 +146,7 @@ class GamesOwnedDetail(APIView):
         #     "review": request.data['review'],
         # }
         game_owned = self.get_object(pk)
-        game_owned.owner_rating = request.data['owner_rating']
-        game_owned.review = request.data['review']
+        game_owned.notes = request.data['notes']
 
         # todo confirm game owned is not null (i.e. exists)
         serializer = GamesOwnedSerializer(game_owned)
