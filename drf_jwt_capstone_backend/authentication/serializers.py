@@ -17,7 +17,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = User
         # If added new columns through the User model, add them in the fields list as seen below
         fields = ('id', 'username', 'password', 'email',
-                  'first_name', 'last_name', 'middle_name', 'favorite_game')
+                  'first_name', 'last_name', 'middle_name')
 
         # without this id doesn't appear in response
         # (with 'id' only added to fields ^, signup fails because it requires an id field)
@@ -30,7 +30,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             middle_name=validated_data['middle_name'],
-            favorite_game=validated_data['favorite_game']
 
             # If added new columns through the User model, add them in this
             # create method call in the format as seen above
