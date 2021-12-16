@@ -30,7 +30,8 @@ def build_owned_game_for_json_serialization(owned_game):
             "release_date": owned_game.game.release_date,
             "value": owned_game.game.value,
         },
-        "notes": owned_game.notes
+        "notes": owned_game.notes,
+        "fixed_value": owned_game.fixed_value
     }
 
 class GamesOwnedAPI(APIView):
@@ -58,7 +59,8 @@ class GamesOwnedAPI(APIView):
         games_owned = {
             "user_id": user_id,
             "game_id": game_id,
-            "notes": "N/A"
+            "notes": "N/A",
+            "fixed_value": 0
         }
         serializer = GamesOwnedSerializer(data=games_owned)
         if serializer.is_valid(raise_exception=True):
@@ -76,7 +78,7 @@ class GamesOwnedAPI(APIView):
 
     def patch(self, request, user_id, game_id):  # pk = GamesOwnedId
         game_owned = self.get_object(user_id, game_id)
-        game_owned.notes = request.data['notes']
+        game_owned.fixed_value = request.data['fixed_value']
 
         # todo confirm game owned is not null (i.e. exists)
         serializer = GamesOwnedSerializer(game_owned)
@@ -108,7 +110,8 @@ class GamesOwnedAdd(APIView):
         games_owned = {
             "user_id": request.data['user_id'],
             "game_id": request.data['game_id'],
-            "notes": "N/A"
+            "notes": "N/A",
+            "fixed_value": 0
         }
         serializer = GamesOwnedSerializer(data=games_owned)
         if serializer.is_valid(raise_exception=True):
@@ -146,7 +149,7 @@ class GamesOwnedDetail(APIView):
         #     "review": request.data['review'],
         # }
         game_owned = self.get_object(pk)
-        game_owned.notes = request.data['notes']
+        game_owned.fixed_value = request.data['fixed_value']
 
         # todo confirm game owned is not null (i.e. exists)
         serializer = GamesOwnedSerializer(game_owned)
