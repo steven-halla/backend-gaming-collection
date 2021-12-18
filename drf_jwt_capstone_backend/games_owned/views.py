@@ -99,8 +99,6 @@ class GamesOwnedList(APIView):
         return JsonResponse(games, safe=False)
 
 
-
-# deprecated
 class GamesOwnedAdd(APIView):
     permission_classes = [AllowAny]
 
