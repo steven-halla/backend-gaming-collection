@@ -143,11 +143,6 @@ class GamesOwnedDetail(APIView):
         return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 
     def patch(self, request, pk):  # pk = GamesOwnedId
-        # request = {
-        #     "id": pk,
-        #     "owner_rating": request.data['owner_rating'],
-        #     "review": request.data['review'],
-        # }
         game_owned = self.get_object(pk)
         game_owned.fixed_value = request.data['fixed_value']
 
